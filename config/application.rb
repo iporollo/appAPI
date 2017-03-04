@@ -25,6 +25,8 @@ module AppAPI
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
+    RSpotify::authenticate("ea09225ef2974242a1549f3812a15496", "49df12072ddf49e7b176bf15b2eef15a")
+    
     config.api_only = true
   end
 end
