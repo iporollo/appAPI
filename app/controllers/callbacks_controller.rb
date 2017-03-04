@@ -3,6 +3,10 @@ class CallbacksController < ApplicationController
 	require 'net/http'
 	require 'json'
 
+	def give_token
+
+	end
+
 	def spotify_callback
  		redirect_uri = "https://aqueous-taiga-60305.herokuapp.com/spotify/callback"
 		client_id = "ea09225ef2974242a1549f3812a15496"
