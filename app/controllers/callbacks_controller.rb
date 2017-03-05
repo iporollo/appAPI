@@ -4,12 +4,8 @@ class CallbacksController < ApplicationController
 	require 'json'
 
 	def give_token
-		if(params.has_key?(:tag))
-
-			parsedResponse=JSON.parse(@spotifyTokenResponse)
-			render json: parsedResponse.access_token
-
-		end
+		parsedResponse=JSON.parse(@spotifyTokenResponse) unless @spotifyTokenResponse.nil?
+		render json: parsedResponse.access_token
 	end
 
 	def spotify_callback
