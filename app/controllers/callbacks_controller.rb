@@ -21,10 +21,11 @@ class CallbacksController < ApplicationController
 						   :client_secret => client_secret})
 
 			puts spotifyTokenResponse.as_json
+			parsedResponse = JSON.parse(spotifyTokenResponse);
 
-			User.create(:access_token => spotifyTokenResponse["access_token"], 
-					 :refresh_token => spotifyTokenResponse["refresh_token"], 
-					 :token_expiration_time => spotifyTokenResponse["expires_in"])
+			User.create(:access_token => parsedResponse["access_token"], 
+					 :refresh_token => parsedResponse["refresh_token"], 
+					 :token_expiration_time => parsedResponse["expires_in"])
 
 		else
 			error = params[:error]
