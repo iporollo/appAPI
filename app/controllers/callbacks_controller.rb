@@ -4,8 +4,13 @@ class CallbacksController < ApplicationController
 	require 'json'
 
 	def give_token
+		if(params.has_key?(:tag))
+			
+			#parsedResponse=JSON.parse(response)
+			#accessToken = parsedResponse.accessToken
+			render json: @spotifyTokenResponse.access_token
 
-	end
+		end
 
 	def spotify_callback
  		redirect_uri = "https://aqueous-taiga-60305.herokuapp.com/spotify/callback"
@@ -18,19 +23,15 @@ class CallbacksController < ApplicationController
 		if(params.has_key?(:code))
 			code = params[:code]
 
-			response = HTTParty.post("https://accounts.spotify.com/api/token", 
+			@spotifyTokenResponse = HTTParty.post("https://accounts.spotify.com/api/token", 
 				:query => {:grant_type => "authorization_code", 
 						   :code => code, 
 						   :redirect_uri => redirect_uri,
 						   :client_id => client_id,
 						   :client_secret => client_secret})
 
-			puts response
-			#render json bullshit
-			#render json: response access token
-			#parsedResponse=JSON.parse(response)
-			#accessToken = parsedResponse.accessToken
-			#have to check some shit for that also idk figure it out 
+			puts @spotifyTokenResponse.refresh_token
+
 
 		else
 			error = params[:error]
