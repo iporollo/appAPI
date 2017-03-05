@@ -9,14 +9,13 @@ class UsersController < ApplicationController
 		puts uid
 		currentUser = User.find(uid)
 		puts currentUser
-		render currentUser.access_token
+		render :text => currentUser.access_token
 	end
 
 	def give_rails_uid
 
 		lastCreatedUID = User.last.id
-		puts lastCreatedUID
-		render lastCreatedUID 
+		render :text => lastCreatedUID 
 
 	end
 
