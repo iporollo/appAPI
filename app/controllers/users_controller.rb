@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 	def give_rails_uid
 
 		lastCreatedUID = User.last.id
-
+		puts lastCreatedUID
 		render lastCreatedUID 
 
 	end
