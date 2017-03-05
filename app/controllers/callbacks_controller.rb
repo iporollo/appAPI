@@ -6,9 +6,8 @@ class CallbacksController < ApplicationController
 	def give_token
 		if(params.has_key?(:tag))
 
-			#parsedResponse=JSON.parse(response)
-			#accessToken = parsedResponse.accessToken
-			render json: @spotifyTokenResponse.access_token
+			parsedResponse=JSON.parse(@spotifyTokenResponse)
+			render json: parsedResponse.access_token
 
 		end
 	end
@@ -31,7 +30,8 @@ class CallbacksController < ApplicationController
 						   :client_id => client_id,
 						   :client_secret => client_secret})
 
-			puts @spotifyTokenResponse.refresh_token
+			puts @spotifyTokenResponse.as_json
+
 
 
 		else
