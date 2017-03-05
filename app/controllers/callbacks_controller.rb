@@ -5,12 +5,13 @@ class CallbacksController < ApplicationController
 
 	def give_token
 		if(params.has_key?(:tag))
-			
+
 			#parsedResponse=JSON.parse(response)
 			#accessToken = parsedResponse.accessToken
 			render json: @spotifyTokenResponse.access_token
 
 		end
+	end
 
 	def spotify_callback
  		redirect_uri = "https://aqueous-taiga-60305.herokuapp.com/spotify/callback"
