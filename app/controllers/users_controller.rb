@@ -19,4 +19,13 @@ class UsersController < ApplicationController
 
 	end
 
+	def update_spotify_id
+
+		receivedJSON = request.raw_post
+		parsedData = JSON.parse(receivedJSON)
+		User.where(:access_token => parsedData["token"]).update_all(:spotify_user_id => parsedData["spotifyID"])
+
+	end
+
+
 end
