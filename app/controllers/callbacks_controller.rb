@@ -20,7 +20,6 @@ class CallbacksController < ApplicationController
 						   :client_id => client_id,
 						   :client_secret => client_secret})
 
-			puts spotifyTokenResponse.as_json
 			parsedResponse = JSON.parse(spotifyTokenResponse.body);
 
 			User.create(:access_token => parsedResponse["access_token"], 
