@@ -3,8 +3,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     create_table :users do |t|
 
     	t.string :uid
-    	#access token
-    	#refresh token
 
     	t.timestamps
     end
