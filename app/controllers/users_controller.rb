@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 	def give_token
 		uid = params[:user]
 		currentUser = User.find(uid)
+		puts currentUser
 		render currentUser.access_token
 	end
 
