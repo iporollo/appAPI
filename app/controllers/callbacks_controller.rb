@@ -5,7 +5,7 @@ class CallbacksController < ApplicationController
 
 	def give_token
 		parsedResponse=JSON.parse(@spotifyTokenResponse) unless @spotifyTokenResponse.nil?
-		puts parsedResponse
+		puts parsedResponse["access_token"]
 		#render json: parsedResponse.access_token
 	end
 
