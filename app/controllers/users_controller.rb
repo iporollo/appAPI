@@ -6,14 +6,14 @@ class UsersController < ApplicationController
 
 	def give_token
 		uid = params[:user]
-		currentUser = Users.find(uid)
+		currentUser = User.find(uid)
 		puts currentUser
 		render currentUser.access_token
 	end
 
 	def give_rails_uid
 
-		lastCreatedUID = Users.last.id
+		lastCreatedUID = User.last.id
 
 		render lastCreatedUID 
 

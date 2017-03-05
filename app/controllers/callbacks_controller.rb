@@ -22,7 +22,7 @@ class CallbacksController < ApplicationController
 
 			puts spotifyTokenResponse.as_json
 
-			Users.new(:access_token => spotifyTokenResponse["access_token"], 
+			User.create(:access_token => spotifyTokenResponse["access_token"], 
 					 :refresh_token => spotifyTokenResponse["refresh_token"], 
 					 :token_expiration_time => spotifyTokenResponse["expires_in"])
 
