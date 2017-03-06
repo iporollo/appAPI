@@ -20,11 +20,17 @@ class CallbacksController < ApplicationController
 						   :client_id => client_id,
 						   :client_secret => client_secret})
 
-			parsedResponse = JSON.parse(spotifyTokenResponse.body);
+			parsedTokenResponse = JSON.parse(spotifyTokenResponse.body);
 
-			User.create(:access_token => parsedResponse["access_token"], 
-					 :refresh_token => parsedResponse["refresh_token"], 
-					 :token_expiration_time => parsedResponse["expires_in"])
+
+			spotifyProfileResponse = HTTParty.get("https://api.spotify.com/v1/me", 
+				:headers => {"Authorization"=> "Bearer #{parsedTokenResponse["access_token"]}"})
+			parsedProfileResponse = JSON.parse(spotifyProfileResponse)
+
+			User.create(:access_token => parsedTokenResponse["access_token"], 
+					 :refresh_token => parsedTokenResponse["refresh_token"], 
+					 :token_expiration_time => parsedTokenResponse["expires_in"]
+					 :spotify_user_id => parsedProfileResponse["id"])
 
 		else
 			error = params[:error]
