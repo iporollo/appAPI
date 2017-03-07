@@ -27,12 +27,10 @@ class CallbacksController < ApplicationController
 				:headers => {"Authorization"=> "Bearer #{parsedTokenResponse["access_token"]}"})
 			parsedProfileResponse = JSON.parse(spotifyProfileResponse)
 
-Client.where(:first_name => 'Andy').first_or_create(:locked => false)
-
 			User.where(:spotify_user_id => parsedProfileResponse["id"]).first_or_create
 					(:access_token => parsedTokenResponse["access_token"], 
 					 :refresh_token => parsedTokenResponse["refresh_token"], 
-					 :token_expiration_time => parsedTokenResponse["expires_in"]
+					 :token_expiration_time => parsedTokenResponse["expires_in"],
 					 :spotify_user_id => parsedProfileResponse["id"])
 
 		else
