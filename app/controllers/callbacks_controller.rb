@@ -26,7 +26,8 @@ class CallbacksController < ApplicationController
 			spotifyProfileResponse = HTTParty.get("https://api.spotify.com/v1/me", 
 				:headers => {"Authorization"=> "Bearer #{parsedTokenResponse["access_token"]}"})
 			puts spotifyProfileResponse
-			parsedProfileResponse = JSON.parse(spotifyProfileResponse)
+			parsedProfileResponse = JSON.parse(spotifyProfileResponse.body)
+			puts parsedProfileResponse
 
 			User.where(:spotify_user_id => parsedProfileResponse["id"]).first_or_create(:access_token => parsedTokenResponse["access_token"], 
 					 :refresh_token => parsedTokenResponse["refresh_token"], 
