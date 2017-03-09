@@ -17,6 +17,8 @@ class UsersController < ApplicationController
 		
 		if(Time.now > currentUser.token_expiration_time)
 
+			puts encodedClientSecret
+			puts encodedClientID
 			refreshResponse = HTTParty.post("https://accounts.spotify.com/api/token", 
 				:headers => {"Authorization"=> "Bearer #{encodedClientID}:#{encodedClientSecret}"},
 				:query => {:grant_type => "refresh_token", 
