@@ -20,13 +20,15 @@ class UsersController < ApplicationController
 			puts encodedClientSecret
 			puts encodedClientID
 			refreshResponse = HTTParty.post("https://accounts.spotify.com/api/token", 
-				:headers => {"Authorization"=> "Bearer #{encodedClientID}:#{encodedClientSecret}"},
+				:headers => {"Authorization"=> "Basic #{encodedClientID}:#{encodedClientSecret}"},
 				:query => {:grant_type => "refresh_token", 
 						   :refresh_token => currentUser.refresh_token})
 
 			parsedRefreshResponse = JSON.parse(refreshResponse.body)
 
 			puts parsedRefreshResponse
+
+			#check is parsedRefreshResponse["error"]
 
 			currentUser.update_attribute(:access_token, parsedRefreshResponse["access_token"])
 			currentUser.update_attribute(:token_expiration_time, Time.now + parsedRefreshResponse["expires_in"])
