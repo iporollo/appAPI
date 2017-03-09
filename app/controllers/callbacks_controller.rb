@@ -4,6 +4,7 @@ class CallbacksController < ApplicationController
 	require 'json'
 
 	def spotify_callback
+
  		redirect_uri = "https://aqueous-taiga-60305.herokuapp.com/spotify/callback"
 		client_id = "ea09225ef2974242a1549f3812a15496"
 		client_secret = "49df12072ddf49e7b176bf15b2eef15a"
@@ -26,10 +27,14 @@ class CallbacksController < ApplicationController
 			spotifyProfileResponse = HTTParty.get("https://api.spotify.com/v1/me", 
 				:headers => {"Authorization"=> "Bearer #{parsedTokenResponse["access_token"]}"})
 			parsedProfileResponse = JSON.parse(spotifyProfileResponse.body)
+			
+			now = Time.now
+			tokenExpirationTime = now + (parsedTokenResponse["expires_in"])
+			
 
 			User.where(:spotify_user_id => parsedProfileResponse["id"]).first_or_create(:access_token => parsedTokenResponse["access_token"], 
 					 :refresh_token => parsedTokenResponse["refresh_token"], 
-					 :token_expiration_time => parsedTokenResponse["expires_in"],
+					 :token_expiration_time => tokenExpirationTime,
 					 :spotify_user_id => parsedProfileResponse["id"])
 
 		else
