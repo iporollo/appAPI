@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
 	def give_token
 		spotifyID = params[:user]
-		currentUser = User.find(:spotify_user_id => spotifyID)
+		currentUser = User.find_by spotify_user_id: spotifyID
 		puts currentUser
 		puts currentUser.access_token
 		#I need to add a check here for access token expiration
