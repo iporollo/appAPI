@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 			puts encodedClientID
 			refreshResponse = HTTParty.post("https://accounts.spotify.com/api/token", 
 				:query => {:grant_type => "refresh_token", 
-						   :refresh_token => currentUser.refresh_token
+						   :refresh_token => currentUser.refresh_token,
 						   :client_id => client_id,
 						   :client_secret => client_secret})
 
