@@ -9,9 +9,6 @@ class UsersController < ApplicationController
 		client_id = "ea09225ef2974242a1549f3812a15496"
 		client_secret = "49df12072ddf49e7b176bf15b2eef15a"
 
-		encodedClientID = Base64.encode64(client_id)
-		encodedClientSecret = Base64.encode64(client_secret)
-
 		spotifyID = params[:user]
 		currentUser = User.find_by spotify_user_id: spotifyID
 		
@@ -20,9 +17,10 @@ class UsersController < ApplicationController
 			puts encodedClientSecret
 			puts encodedClientID
 			refreshResponse = HTTParty.post("https://accounts.spotify.com/api/token", 
-				:headers => {"Authorization"=> "Basic #{encodedClientID}:#{encodedClientSecret}"},
 				:query => {:grant_type => "refresh_token", 
-						   :refresh_token => currentUser.refresh_token})
+						   :refresh_token => currentUser.refresh_token
+						   :client_id => client_id,
+						   :client_secret => client_secret})
 
 			parsedRefreshResponse = JSON.parse(refreshResponse.body)
 
