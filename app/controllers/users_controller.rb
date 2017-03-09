@@ -5,27 +5,19 @@ class UsersController < ApplicationController
 
 
 	def give_token
-		uid = params[:user]
+		spotifyID = params[:user]
 		puts uid
-		currentUser = User.find(uid)
+		currentUser = User.where(:spotify_user_id => spotifyID)
 		puts currentUser
 		render :json => {:token => currentUser.access_token}
 	end
 
-	# def give_rails_uid
+	def give_spotify_id
 
-	# 	lastCreatedUID = User.last.id
-	# 	render :json => {:uid => lastCreatedUID}
+	 	lastCreatedSpotifyID = User.last.spotify_user_id
+	 	render :json => {:id => lastCreatedSpotifyID}
 
-	# end
-
-	# def update_spotify_id
-
-	# 	#this doesnt work
-	# 	receivedJSON =  JSON.parse(request.body.read)
-	# 	User.where(:access_token => receivedJSON["token"]).update_all(:spotify_user_id => receivedJSON["spotifyID"])
-
-	# end
+	end
 
 
 end
