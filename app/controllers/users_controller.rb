@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
 	def give_token
 		spotifyID = params[:user]
-		puts uid
 		currentUser = User.where(:spotify_user_id => spotifyID)
 		puts currentUser
 		render :json => {:token => currentUser.access_token}
