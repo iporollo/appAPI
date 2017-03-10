@@ -6,8 +6,6 @@ class CallbacksController < ApplicationController
 	def spotify_callback
 
  		redirect_uri = "https://aqueous-taiga-60305.herokuapp.com/spotify/callback"
-		client_id = "ea09225ef2974242a1549f3812a15496"
-		client_secret = "49df12072ddf49e7b176bf15b2eef15a"
 
 		status = params[:status]
 
@@ -18,8 +16,8 @@ class CallbacksController < ApplicationController
 				:query => {:grant_type => "authorization_code", 
 						   :code => code, 
 						   :redirect_uri => redirect_uri,
-						   :client_id => client_id,
-						   :client_secret => client_secret})
+						   :client_id => ENV["SPOTIFY_CLIENT_ID"],
+						   :client_secret => ENV["SPOTIFY_CLIENT_SECRET"]})
 
 			parsedTokenResponse = JSON.parse(spotifyTokenResponse.body);
 
