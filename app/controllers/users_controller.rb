@@ -24,7 +24,8 @@ class UsersController < ApplicationController
 
 		end
 
-		render :json => {:token => currentUser.access_token}
+		render :json => {:token => currentUser.access_token, 
+						 :expires_in => currentUser.token_expiration_time}
 	end
 
 	def give_spotify_id
