@@ -29,6 +29,9 @@ class CallbacksController < ApplicationController
 			now = Time.now
 			tokenExpirationTime = now + (parsedTokenResponse["expires_in"])
 			
+			puts Time.now
+			puts parsedTokenResponse["expires_in"]
+			puts Time.now + parsedTokenResponse["expires_in"]
 
 			User.where(:spotify_user_id => parsedProfileResponse["id"]).first_or_create(:access_token => parsedTokenResponse["access_token"], 
 					 :refresh_token => parsedTokenResponse["refresh_token"], 
