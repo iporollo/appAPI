@@ -19,6 +19,10 @@ class UsersController < ApplicationController
 
 			parsedRefreshResponse = JSON.parse(refreshResponse.body)
 
+			puts Time.now
+			puts parsedRefreshResponse["expires_in"]
+			puts Time.now + parsedRefreshResponse["expires_in"]
+
 			currentUser.update_attribute(:access_token, parsedRefreshResponse["access_token"])
 			currentUser.update_attribute(:token_expiration_time, Time.now + parsedRefreshResponse["expires_in"])
 
