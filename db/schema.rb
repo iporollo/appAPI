@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170305060048) do
+ActiveRecord::Schema.define(version: 20170314092524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20170305060048) do
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "party_id"
+    t.index ["party_id"], name: "index_members_on_party_id", using: :btree
   end
 
   create_table "parties", force: :cascade do |t|
@@ -26,6 +28,8 @@ ActiveRecord::Schema.define(version: 20170305060048) do
     t.string   "partyID"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_parties_on_user_id", using: :btree
   end
 
   create_table "songs", force: :cascade do |t|
@@ -35,6 +39,8 @@ ActiveRecord::Schema.define(version: 20170305060048) do
     t.string   "imageURL"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "party_id"
+    t.index ["party_id"], name: "index_songs_on_party_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,4 +52,7 @@ ActiveRecord::Schema.define(version: 20170305060048) do
     t.string   "token_expiration_time"
   end
 
+  add_foreign_key "members", "parties"
+  add_foreign_key "parties", "users"
+  add_foreign_key "songs", "parties"
 end
