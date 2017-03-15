@@ -14,22 +14,15 @@ class PartiesController < ApplicationController
 	def create
 
 		party = params[:party]
-		
-		puts params[:name]
-		puts params[:playlist_id]
-		puts params[:party_id]
-		puts params[:host_spotify_id]
-		puts params[:down_vote_state]
-		puts params[:down_vote_state]
 
-		partyOwner = User.find_by spotify_user_id: party["host_spotify_id"]
+		partyOwner = User.find_by spotify_user_id: params[:host_spotify_id]
 
-		Party.create(:name => party["name"],
-					 :playlistID => party["playlist_id"],
-					 :partyID => party["party_id"],
-					 :host_id => party["host_spotify_id"],
-					 :guest_song_add_state => ç,
-					 :down_vote_state => party["down_vote_state"],
+		Party.create(:name => params[:name],
+					 :playlistID => params[:playlist_id],
+					 :partyID => params[:party_id],
+					 :host_id => params[:host_spotify_id],
+					 :guest_song_add_state => params[:guest_song_add_state],
+					 :down_vote_state => params[:down_vote_state],
 					 :user_id => partyOwner.id)
 
 	end
