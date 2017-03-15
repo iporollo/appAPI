@@ -14,9 +14,8 @@ class PartiesController < ApplicationController
 	def create
 
 		party = params[:party]
-		parsedParty = JSON.parse(party)
 
-		puts parsedParty["name"]
+		puts party["name"]
 
 	end
 
