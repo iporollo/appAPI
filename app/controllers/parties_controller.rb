@@ -20,9 +20,10 @@ class PartiesController < ApplicationController
 		Party.create(:name => params[:name], 
 			:playlistID => params[:playlist_id],
 			:partyID => params[:party_id],
-					 :guest_song_add_state => params[:guest_song_add_state],
-					 :down_vote_state => params[:down_vote_state],
-					 :user_id => partyOwner.id)
+			:host_id => params[:host_spotify_id],
+			:guest_song_add_state => params[:guest_song_add_state],
+			:down_vote_state => params[:down_vote_state],
+			:user_id => partyOwner.id)
 
 	end
 
