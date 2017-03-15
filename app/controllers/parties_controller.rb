@@ -14,6 +14,7 @@ class PartiesController < ApplicationController
 	def create
 
 		party = params[:party]
+		puts party["host_spotify_id"]
 		partyOwner = User.find_by spotify_user_id: party["host_spotify_id"]
 
 		Party.create(:name => party["name"],
