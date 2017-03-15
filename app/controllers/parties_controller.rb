@@ -11,4 +11,13 @@ class PartiesController < ApplicationController
 		render :json => {:id_exists => exists}
 	end
 
+	def create
+
+		party = params[:party]
+		parsedParty = JSON.parse(party)
+
+		puts parsedParty["name"]
+
+	end
+
 end
