@@ -15,12 +15,12 @@ class PartiesController < ApplicationController
 
 		party = params[:party]
 		
-		puts party["name"]
-		puts party["playlist_id"]
-		puts party["party_id"]
-		puts party["host_spotify_id"]
-		puts party["down_vote_state"]
-		puts party["down_vote_state"]
+		puts params[:name]
+		puts params[:playlist_id]
+		puts params[:party_id]
+		puts params[:host_spotify_id]
+		puts params[:down_vote_state]
+		puts params[:down_vote_state]
 
 		partyOwner = User.find_by spotify_user_id: party["host_spotify_id"]
 
